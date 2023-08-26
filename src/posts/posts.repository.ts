@@ -18,15 +18,26 @@ export class PostsRepository {
     return this.prisma.post.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  findOnePost(id: number) {
+    return this.prisma.post.findUnique({
+      where: { id }
+    });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  updatePost(id: number, updatePostDto: UpdatePostDto) {
+    return this.prisma.post.update({
+      where: { id },
+      data: {
+        title: updatePostDto.title,
+        text: updatePostDto.text,
+        image: updatePostDto.image
+      }
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  removePost(id: number) {
+    return this.prisma.post.delete({
+      where: { id }
+    });
   }
 }
