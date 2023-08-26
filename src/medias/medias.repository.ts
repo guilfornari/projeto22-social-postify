@@ -15,19 +15,38 @@ export class MediasRepository {
     });
   }
 
-  findAll() {
-    return `This action returns all medias`;
+  findMediaByNameAndUsername(createMediaDto: CreateMediaDto | UpdateMediaDto) {
+    return this.prisma.media.findFirst({
+      where: {
+        title: createMediaDto.title,
+        username: createMediaDto.username
+      }
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} media`;
+  findAllMedia() {
+    return this.prisma.media.findMany();
   }
 
-  update(id: number, updateMediaDto: UpdateMediaDto) {
-    return `This action updates a #${id} media`;
+  findOneMedia(id: number) {
+    return this.prisma.media.findUnique({
+      where: { id }
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} media`;
+  updateMedia(id: number, updateMediaDto: UpdateMediaDto) {
+    return this.prisma.media.update({
+      where: { id },
+      data: {
+        title: updateMediaDto.title,
+        username: updateMediaDto.username
+      }
+    });
+  }
+
+  removeMedia(id: number) {
+    return this.prisma.media.delete({
+      where: { id }
+    });
   }
 }
