@@ -26,10 +26,11 @@ model Post {
 }
 
 model Publication {
-  id      Int      @id @default(autoincrement())
-  mediaId Int
-  Media   Media    @relation(fields: [mediaId], references: [id])
-  postId  Int
-  Post    Post     @relation(fields: [postId], references: [id])
-  date    DateTime
+  id        Int      @id @default(autoincrement())
+  mediaId   Int
+  Media     Media    @relation(fields: [mediaId], references: [id])
+  postId    Int
+  Post      Post     @relation(fields: [postId], references: [id])
+  date      DateTime
+  published Boolean
 }

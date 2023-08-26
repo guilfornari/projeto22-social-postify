@@ -4,10 +4,14 @@ import { UpdateMediaDto } from './dto/update-media.dto';
 import { MediasRepository } from './medias.repository';
 import { ConflictError } from '../errors/conflictError';
 import { NotFoundError } from '../errors/notfoundError';
+import { PublicationsRepository } from '../publications/publications.repository';
+import { ForbiddenError } from '../errors/forbiddenError';
 
 @Injectable()
 export class MediasService {
-  constructor(private mediaRepository: MediasRepository) { }
+  constructor(
+    private mediaRepository: MediasRepository,
+    private publicationRepository: PublicationsRepository) { }
 
   async createMedia(createMediaDto: CreateMediaDto) {
     const media = await this.mediaRepository.findMediaByNameAndUsername(createMediaDto);
@@ -36,6 +40,10 @@ export class MediasService {
   async removeMedia(id: number) {
     const media = await this.mediaRepository.findOneMedia(id);
     if (!media) throw new NotFoundError(id);
+
+    const publication = await this.publicationRepository.findOnePublicationByMediaId(id);
+    if (publication) throw new ForbiddenError(id);
+
     return await this.mediaRepository.removeMedia(id);
   }
 }
