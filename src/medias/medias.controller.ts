@@ -5,11 +5,11 @@ import { UpdateMediaDto } from './dto/update-media.dto';
 
 @Controller('medias')
 export class MediasController {
-  constructor(private readonly mediasService: MediasService) { }
+  constructor(private mediasService: MediasService) { }
 
   @Post()
-  create(@Body() createMediaDto: CreateMediaDto) {
-    return this.mediasService.create(createMediaDto);
+  createMedia(@Body() createMediaDto: CreateMediaDto) {
+    return this.mediasService.createMedia(createMediaDto);
   }
 
   @Get()
