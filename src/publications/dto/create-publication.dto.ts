@@ -1,4 +1,4 @@
-import { IsBoolean, IsDate, IsInt, IsOptional } from "class-validator";
+import { IsBoolean, IsDateString, IsInt, IsOptional } from "class-validator";
 
 export class CreatePublicationDto {
     @IsInt()
@@ -7,9 +7,9 @@ export class CreatePublicationDto {
     @IsInt()
     postId: number;
 
-    @IsDate()
-    date: Date;
+    @IsDateString()
+    date: string;
 
-    @IsBoolean() @IsOptional()
+    @IsBoolean()
     published: boolean;
 }
