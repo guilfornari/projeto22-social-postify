@@ -1,4 +1,4 @@
-import { IsBoolean, IsDateString, IsInt, IsOptional } from "class-validator";
+import { IsBoolean, IsDateString, IsInt } from "class-validator";
 
 export class CreatePublicationDto {
     @IsInt()

@@ -85,18 +85,17 @@ describe('AppController (e2e)', () => {
       .send({
         mediaId: media.id,
         postId: post.id,
-        date: new Date(),
-        published: true
+        date: "2023-10-28T15:23:14.903Z",
+        published: false
       });
 
-    console.log(response.text);
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({
       id: publication.id,
       mediaId: expect.any(Number),
       postId: expect.any(Number),
       date: expect.any(String),
-      published: true
+      published: false
     });
 
   });
